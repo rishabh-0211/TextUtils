@@ -53,7 +53,7 @@ export default function Textarea(props) {
             <button
               type="button"
               className={`btn btn-${
-                props.mode == "light" ? "success" : "light"
+                props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleUpcase}>
               Upper case
@@ -61,7 +61,7 @@ export default function Textarea(props) {
             <button
               type="button"
               className={`btn btn-${
-                props.mode == "light" ? "success" : "light"
+                props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleLocase}>
               Lower case
@@ -69,7 +69,7 @@ export default function Textarea(props) {
             <button
               type="button"
               className={`btn btn-${
-                props.mode == "light" ? "success" : "light"
+                props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleInversecase}>
               Inverse case
@@ -77,7 +77,7 @@ export default function Textarea(props) {
             <button
               type="button"
               className={`btn btn-${
-                props.mode == "light" ? "success" : "light"
+                props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleClearcase}>
               Clear
