@@ -20,7 +20,7 @@ function App() {
   function toggleMode() {
     if (mode === "light") {
       setmode("dark");
-      document.body.style.backgroundColor = "#363062";
+      document.body.style.backgroundColor = "rgb(46 45 56)";
       showAlert("this is dark mode", "success");
     } else {
       setmode("light");
@@ -41,7 +41,7 @@ function App() {
         <div className="container my-3">
           <Switch>
             <Route exact path="/about">
-              <About />
+              <About Mode={mode} />
             </Route>
 
             <Route exact path="/">

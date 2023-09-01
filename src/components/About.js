@@ -1,8 +1,10 @@
 import React from 'react'
 
-function About() {
+function About(props) {
   return (
-    <div>About h jiii</div>
+    <div className={` p-3 mb-2 text-${
+                props.Mode === "light" ? "dark" : "light"
+              }`}>About h jiii</div>
   )
 }
 
