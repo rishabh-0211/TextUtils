@@ -22,6 +22,17 @@ export default function Textarea(props) {
     }
     props.showalert("your text case is inverted ", "success");
   };
+
+  const handleCapitalizedcase = () => {
+    let arr = text.split(" ");
+    let newtext1="";
+    for (let i = 0; i < arr.length;i++){
+    
+      newtext1 += arr[i].charAt(0).toUpperCase() + arr[i].slice(1) + " ";
+    }
+    setText(newtext1);
+    props.showalert("your text case is Capitalized", "success");
+  };
   const handleClearcase = () => {
     let newtext = "";
     setText(newtext);
@@ -37,9 +48,10 @@ export default function Textarea(props) {
 
   return (
     <>
-      <div className={` p-3 mb-2 text-${
-                props.Mode === "light" ? "dark" : "light"
-              }`}>
+      <div
+        className={` p-3 mb-2 text-${
+          props.Mode === "light" ? "dark" : "light"
+        }`}>
         <div className="container">
           <div className={`mb-3 `}>
             <h1>{props.heading}</h1>
@@ -73,6 +85,14 @@ export default function Textarea(props) {
               } my-4 mx-1`}
               onClick={handleInversecase}>
               Inverse case
+            </button>
+            <button
+              type="button"
+              className={`btn btn-${
+                props.mode === "light" ? "success" : "light"
+              } my-4 mx-1`}
+              onClick={handleCapitalizedcase}>
+              Capitalized Case
             </button>
             <button
               type="button"
