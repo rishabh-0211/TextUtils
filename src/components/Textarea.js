@@ -24,10 +24,11 @@ export default function Textarea(props) {
   };
 
   const handleCapitalizedcase = () => {
+
     let arr = text.split(" ");
     let newtext1="";
     for (let i = 0; i < arr.length;i++){
-    
+      arr[i]=arr[i].toLowerCase();
       newtext1 += arr[i].charAt(0).toUpperCase() + arr[i].slice(1) + " ";
     }
     setText(newtext1);
