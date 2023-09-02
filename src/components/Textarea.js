@@ -11,15 +11,42 @@ export default function Textarea(props) {
     setText(newtext);
     props.showalert("changed to lower case", "success");
   };
+  const handleAlertnatecase = () => {
+    let arr = text.split(" ");
+    let newtext1 = "";
+    for (let i = 0; i < arr.length; i++) {
+      let kii=1;
+      for(let j = 0; j < arr[i].length; j++){
+        if(kii){
+        newtext1 += arr[i][j].toLowerCase();
+        kii=0;
+        }
+      else{
+        newtext1 += arr[i][j].toUpperCase();
+        kii=1;
+      }
+      }
+      newtext1 +=  " ";
+    }
+    setText(newtext1);
+    props.showalert("your text has Alternating cases ", "success");
+  };
   const handleInversecase = () => {
-    if (text[0] >= "a" && text[0] <= "z") {
-      let newtext = text.toUpperCase();
-      setText(newtext);
+    let newtext = "";
+    for(let i=0; i<text.length; i++) {
+    if (text[i] >= "a" && text[i] <= "z") {
+       newtext += text[i].toUpperCase();
+      
     }
-    if (text[0] >= "A" && text[0] <= "Z") {
-      let newtext = text.toLowerCase();
-      setText(newtext);
+    else if (text[i] >= "A" && text[i] <= "Z") {
+      newtext += text[i].toLowerCase();
+     
     }
+    else{
+      newtext += text[i];
+    }
+  }
+  setText(newtext);
     props.showalert("your text case is inverted ", "success");
   };
 
@@ -34,6 +61,15 @@ export default function Textarea(props) {
     setText(newtext1);
     props.showalert("your text case is Capitalized", "success");
   };
+  const handleInversestring = () => {
+    let newtext = text.split('').reverse().join('');
+    setText(newtext);
+    props.showalert("your string is reveresed ", "success");
+  };
+  const handleCopyText = () => {
+    navigator.clipboard.writeText(text);
+    props.showalert("your text is copied ", "success");
+  };
   const handleClearcase = () => {
     let newtext = "";
     setText(newtext);
@@ -46,7 +82,15 @@ export default function Textarea(props) {
   if (text !== "") {
     Textlength = text.split(" ").length;
   }
-
+const speak = () => {
+  let msg = new SpeechSynthesisUtterance();
+  msg.text = text.toLowerCase();
+  msg.lang = "en-US";
+  msg.rate = 1.0; 
+  msg.pitch = 2.0; 
+  window.speechSynthesis.speak(msg);
+  props.showalert("speaking ", "success");
+};
   return (
     <>
       <div
@@ -69,7 +113,7 @@ export default function Textarea(props) {
                 props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleUpcase}>
-              Upper case
+              UPPER CASE
             </button>
             <button
               type="button"
@@ -77,7 +121,23 @@ export default function Textarea(props) {
                 props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleLocase}>
-              Lower case
+              lower case
+            </button>
+            <button
+              type="button"
+              className={`btn btn-${
+                props.mode === "light" ? "success" : "light"
+              } my-4 mx-1`}
+              onClick={handleAlertnatecase}>
+              aLtErNaTiNg cAsE
+            </button>
+            <button
+              type="submit"
+              onClick={speak}
+              className={`btn btn-${
+                props.mode === "light" ? "success" : "light"
+              } my-4 mx-1`}>
+              Speak
             </button>
             <button
               type="button"
@@ -85,7 +145,7 @@ export default function Textarea(props) {
                 props.mode === "light" ? "success" : "light"
               } my-4 mx-1`}
               onClick={handleInversecase}>
-              Inverse case
+              Inverse Case
             </button>
             <button
               type="button"
@@ -94,6 +154,22 @@ export default function Textarea(props) {
               } my-4 mx-1`}
               onClick={handleCapitalizedcase}>
               Capitalized Case
+            </button>
+            <button
+              type="button"
+              className={`btn btn-${
+                props.mode === "light" ? "success" : "light"
+              } my-4 mx-1`}
+              onClick={handleInversestring}>
+              Inverse String
+            </button>
+            <button
+              type="button"
+              className={`btn btn-${
+                props.mode === "light" ? "success" : "light"
+              } my-4 mx-1`}
+              onClick={handleCopyText}>
+              Copy
             </button>
             <button
               type="button"
@@ -112,7 +188,7 @@ export default function Textarea(props) {
           </p>
           <p>{0.008 * Textlength} minutes to read </p>
           <h2>Preview</h2>
-          <p>{text.length === 0 ? "Your text will previewed here" : text}</p>
+          <p>{text.length === 0 ? "Your text will be previewed here" : text}</p>
         </div>
       </div>
     </>
