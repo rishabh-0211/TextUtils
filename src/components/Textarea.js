@@ -2,16 +2,28 @@ import React, { useState } from "react";
 export default function Textarea(props) {
   const [text, setText] = useState("");
   const handleUpcase = () => {
+    if(text===""){
+      props.showalert("please enter text", "danger");
+      return ;
+    }
     let newtext = text.toUpperCase();
     setText(newtext);
     props.showalert("changed to upper case", "success");
   };
   const handleLocase = () => {
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     let newtext = text.toLowerCase();
     setText(newtext);
     props.showalert("changed to lower case", "success");
   };
   const handleAlertnatecase = () => {
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     let arr = text.split(" ");
     let newtext1 = "";
     for (let i = 0; i < arr.length; i++) {
@@ -32,6 +44,10 @@ export default function Textarea(props) {
     props.showalert("your text has Alternating cases ", "success");
   };
   const handleInversecase = () => {
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     let newtext = "";
     for(let i=0; i<text.length; i++) {
     if (text[i] >= "a" && text[i] <= "z") {
@@ -51,7 +67,10 @@ export default function Textarea(props) {
   };
 
   const handleCapitalizedcase = () => {
-
+if (text === "") {
+  props.showalert("please enter text", "danger");
+  return;
+}
     let arr = text.split(" ");
     let newtext1="";
     for (let i = 0; i < arr.length;i++){
@@ -62,15 +81,27 @@ export default function Textarea(props) {
     props.showalert("your text case is Capitalized", "success");
   };
   const handleInversestring = () => {
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     let newtext = text.split('').reverse().join('');
     setText(newtext);
     props.showalert("your string is reveresed ", "success");
   };
   const handleCopyText = () => {
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     navigator.clipboard.writeText(text);
     props.showalert("your text is copied ", "success");
   };
   const handleClearcase = () => {
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     let newtext = "";
     setText(newtext);
     props.showalert("your text cleared ", "success");
@@ -84,10 +115,21 @@ export default function Textarea(props) {
   }
 const speak = () => {
   let msg = new SpeechSynthesisUtterance();
-  msg.text = text.toLowerCase();
+  
   msg.lang = "en-US";
-  msg.rate = 1.0; 
-  msg.pitch = 2.0; 
+  msg.rate = 1.0;
+  msg.pitch = 2.0;
+ 
+  if (text === "") {
+    msg.text="please enter your text";
+     window.speechSynthesis.speak(msg);
+    props.showalert("please enter text", "danger");
+    
+    return;
+  }
+  
+  msg.text = text.toLowerCase();
+  
   window.speechSynthesis.speak(msg);
   props.showalert("speaking ", "success");
 };
