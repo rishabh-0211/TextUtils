@@ -2,9 +2,9 @@ import React, { useState } from "react";
 export default function Textarea(props) {
   const [text, setText] = useState("");
   const handleUpcase = () => {
-    if(text===""){
+    if (text === "") {
       props.showalert("please enter text", "danger");
-      return ;
+      return;
     }
     let newtext = text.toUpperCase();
     setText(newtext);
@@ -27,18 +27,17 @@ export default function Textarea(props) {
     let arr = text.split(" ");
     let newtext1 = "";
     for (let i = 0; i < arr.length; i++) {
-      let kii=1;
-      for(let j = 0; j < arr[i].length; j++){
-        if(kii){
-        newtext1 += arr[i][j].toLowerCase();
-        kii=0;
+      let kii = 1;
+      for (let j = 0; j < arr[i].length; j++) {
+        if (kii) {
+          newtext1 += arr[i][j].toLowerCase();
+          kii = 0;
+        } else {
+          newtext1 += arr[i][j].toUpperCase();
+          kii = 1;
         }
-      else{
-        newtext1 += arr[i][j].toUpperCase();
-        kii=1;
       }
-      }
-      newtext1 +=  " ";
+      newtext1 += " ";
     }
     setText(newtext1);
     props.showalert("your text has Alternating cases ", "success");
@@ -49,32 +48,28 @@ export default function Textarea(props) {
       return;
     }
     let newtext = "";
-    for(let i=0; i<text.length; i++) {
-    if (text[i] >= "a" && text[i] <= "z") {
-       newtext += text[i].toUpperCase();
-      
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] >= "a" && text[i] <= "z") {
+        newtext += text[i].toUpperCase();
+      } else if (text[i] >= "A" && text[i] <= "Z") {
+        newtext += text[i].toLowerCase();
+      } else {
+        newtext += text[i];
+      }
     }
-    else if (text[i] >= "A" && text[i] <= "Z") {
-      newtext += text[i].toLowerCase();
-     
-    }
-    else{
-      newtext += text[i];
-    }
-  }
-  setText(newtext);
+    setText(newtext);
     props.showalert("your text case is inverted ", "success");
   };
 
   const handleCapitalizedcase = () => {
-if (text === "") {
-  props.showalert("please enter text", "danger");
-  return;
-}
+    if (text === "") {
+      props.showalert("please enter text", "danger");
+      return;
+    }
     let arr = text.split(" ");
-    let newtext1="";
-    for (let i = 0; i < arr.length;i++){
-      arr[i]=arr[i].toLowerCase();
+    let newtext1 = "";
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].toLowerCase();
       newtext1 += arr[i].charAt(0).toUpperCase() + arr[i].slice(1) + " ";
     }
     setText(newtext1);
@@ -85,7 +80,7 @@ if (text === "") {
       props.showalert("please enter text", "danger");
       return;
     }
-    let newtext = text.split('').reverse().join('');
+    let newtext = text.split("").reverse().join("");
     setText(newtext);
     props.showalert("your string is reveresed ", "success");
   };
@@ -111,28 +106,30 @@ if (text === "") {
   };
   let Textlength = 0;
   if (text !== "") {
-    Textlength = text.split(" ").length;
+    Textlength = text.split(/\s+/).filter((elements) => {
+      return elements.length !== 0;
+    }).length;
   }
-const speak = () => {
-  let msg = new SpeechSynthesisUtterance();
-  
-  msg.lang = "en-US";
-  msg.rate = 1.0;
-  msg.pitch = 2.0;
- 
-  if (text === "") {
-    msg.text="please enter your text";
-     window.speechSynthesis.speak(msg);
-    props.showalert("please enter text", "danger");
-    
-    return;
-  }
-  
-  msg.text = text.toLowerCase();
-  
-  window.speechSynthesis.speak(msg);
-  props.showalert("speaking ", "success");
-};
+  const speak = () => {
+    let msg = new SpeechSynthesisUtterance();
+
+    msg.lang = "en-US";
+    msg.rate = 1.0;
+    msg.pitch = 2.0;
+
+    if (text === "") {
+      msg.text = "please enter your text";
+      window.speechSynthesis.speak(msg);
+      props.showalert("please enter text", "danger");
+
+      return;
+    }
+
+    msg.text = text.toLowerCase();
+
+    window.speechSynthesis.speak(msg);
+    props.showalert("speaking ", "success");
+  };
   return (
     <>
       <div
@@ -153,7 +150,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-2`}
               onClick={handleUpcase}>
               UPPER CASE
             </button>
@@ -161,7 +158,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-2`}
               onClick={handleLocase}>
               lower case
             </button>
@@ -169,7 +166,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-2`}
               onClick={handleAlertnatecase}>
               aLtErNaTiNg cAsE
             </button>
@@ -178,14 +175,14 @@ const speak = () => {
               onClick={speak}
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}>
+              } my-2 mx-2`}>
               Speak
             </button>
             <button
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-2`}
               onClick={handleInversecase}>
               Inverse Case
             </button>
@@ -193,7 +190,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-1`}
               onClick={handleCapitalizedcase}>
               Capitalized Case
             </button>
@@ -201,7 +198,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-1`}
               onClick={handleInversestring}>
               Inverse String
             </button>
@@ -209,7 +206,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-2`}
               onClick={handleCopyText}>
               Copy
             </button>
@@ -217,7 +214,7 @@ const speak = () => {
               type="button"
               className={`btn btn-${
                 props.mode === "light" ? "success" : "light"
-              } my-4 mx-1`}
+              } my-2 mx-2`}
               onClick={handleClearcase}>
               Clear
             </button>
